@@ -1,0 +1,132 @@
+@font-face {
+    font-family: Work Sans;
+    src: url(./fonts/WorkSans-VariableFont_wght.ttf);
+}
+
+html {
+    font-family: Work Sans, Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    position:relative;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+
+    h1 {
+        color: $dark-gray;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: clamp(24px, 2vw, 2.2vw);
+    }
+    h2 {
+        color: $gray;
+        font-weight: 500;
+        font-size: clamp(16px, 1.1vw, 1.3vw);
+    }
+}
+
+.container {
+    max-width: 1440px;
+    width: 100%;
+    margin:auto;
+
+    @media screen and (max-width: 1440px) {
+        padding:0 15px;  
+        width: calc(100% - 30px);
+    }
+}
+
+.heroes {
+    margin: 3rem 0 0;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 6.666%; 
+
+    .hero {
+        width: 20%;
+        flex: 0 0 20%;
+
+        img {
+            width: 100%;
+            border-bottom: 5px solid $red;
+        }
+
+        h3 {
+            color: $dark-gray;
+            font-size: clamp(24px, 1vw, 1.2vw);
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        gap: 8.333%; 
+
+        .hero {
+            width: 25%;
+            flex: 0 0 25%;
+        }    
+    }
+
+    @media screen and (max-width: 992px) {
+        gap: 10%; 
+
+        .hero {
+            width: 45%;
+            flex: 0 0 45%;
+        }    
+    }
+    
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to { 
+        transform: rotate(360deg);
+    }
+}
+ 
+
+ @-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to { 
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.load {
+	width: 32px;
+	height: 32px;
+	margin: 110px auto 0;
+	border:solid 10px $red;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	 -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         1.0s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+    transition: all 0.5s ease-in;
+    animation-name:             rotate; 
+    animation-duration:         1.0s; 
+    animation-iteration-count:  infinite;
+    animation-timing-function: linear; 
+}
+
+.footer {
+    background-color: #FF1510;
+    height: 3rem;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}

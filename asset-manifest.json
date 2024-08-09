@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.54010190.css",
+    "main.js": "/react-gh-pages/static/js/main.61f752a2.js",
+    "static/media/WorkSans-VariableFont_wght.ttf": "/react-gh-pages/static/media/WorkSans-VariableFont_wght.a0297787a1a192213b53.ttf",
+    "static/media/Group.png": "/react-gh-pages/static/media/Group.77d3c46d95da06aa6625.png",
+    "static/media/Shape@1,5x.svg": "/react-gh-pages/static/media/Shape@1,5x.de3d7fd3b48ce3c93da0d41ea6b2619f.svg",
+    "index.html": "/react-gh-pages/index.html",
+    "main.54010190.css.map": "/react-gh-pages/static/css/main.54010190.css.map",
+    "main.61f752a2.js.map": "/react-gh-pages/static/js/main.61f752a2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54010190.css",
+    "static/js/main.61f752a2.js"
+  ]
+}

@@ -19,16 +19,20 @@ main {
 header {
     text-align: center;
 
-    h1 {
-        color: $dark-gray;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: clamp(24px, 2vw, 2.2vw);
-    }
-    h2 {
-        color: $gray;
-        font-weight: 500;
-        font-size: clamp(16px, 1.1vw, 1.3vw);
+    .logo-wrapper {
+        h1 {
+            color: $dark-gray;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: clamp(24px, 2vw, 2.2vw);
+        }
+        h2 {
+            color: $gray;
+            font-weight: 500;
+            font-size: clamp(16px, 1.1vw, 1.3vw);
+        }
+        
+        padding-bottom: 3rem;
     }
 }
 
@@ -43,25 +47,92 @@ header {
     }
 }
 
+.searchForm {
+    width: 60vw;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+
+    margin: auto;
+    background: $light-red;
+    border-radius: 50px;
+    padding: .7vw 1.3vw;
+    text-align: start;
+    @include d-flex-wrap;
+    justify-content: space-between;
+
+    .searchButton {
+        padding: 0;
+        border: none;
+        width: 2rem;
+        background:none;
+        cursor:pointer;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .searchInput {
+        width: calc(100% - 5rem);
+        background: none;
+        border: none;
+        font-size: clamp(16px, 1.1vw, 1.3vw);
+        color: $red;
+
+        &::placeholder {
+            color: $red;
+            opacity: .7;
+            font-weight: 600;
+        }
+        
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $red;
+            transition: .3s;
+        }
+    }
+}
+
 .heroes {
-    margin: 3rem 0 0;
-    display:flex;
-    flex-wrap: wrap;
+    @include d-flex-wrap;
+    padding: 3rem 0;
     gap: 6.666%; 
 
     .hero {
         width: 20%;
         flex: 0 0 20%;
+        margin-bottom: 2rem;
 
-        img {
-            width: 100%;
+        .heroThumb {
             border-bottom: 5px solid $red;
+            width: 100%;
         }
 
         h3 {
             color: $dark-gray;
-            font-size: clamp(24px, 1vw, 1.2vw);
+            font-size: clamp(16px, 1vw, 1.2vw);
         }
+
+        .heroLink {
+            button {
+                background: none;
+                border: none;
+                width: 32px;
+                height: 32px;
+                background-image: url(images/icones/heart/heart-empty-2x.png);
+                background-size:cover;
+                background-repeat: no-repeat;
+            }
+
+            &.favorited{
+                button {
+                    background-image: url(images/icones/heart/heart-filled-2x.png);
+                }  
+            }
+        }
+        
     }
 
     @media screen and (max-width: 1440px) {
@@ -82,6 +153,11 @@ header {
         }    
     }
     
+}
+
+.heroesListPagination {
+    padding-bottom: 7rem;
+    text-align: center;
 }
 
 @keyframes rotate {
@@ -129,4 +205,10 @@ header {
     width: 100%;
     bottom: 0;
     position: absolute;
+
+    text-align: center;
+    p {
+        font-weight: bold;
+        color:white;
+    }
 }

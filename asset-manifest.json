@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Teste-Seri.e-The-Alfred/static/css/main.c52b9f88.css",
-    "main.js": "/Teste-Seri.e-The-Alfred/static/js/main.fa22b524.js",
+    "main.css": "/Teste-Seri.e-The-Alfred/static/css/main.d9a86b76.css",
+    "main.js": "/Teste-Seri.e-The-Alfred/static/js/main.00f90556.js",
     "static/media/WorkSans-VariableFont_wght.ttf": "/Teste-Seri.e-The-Alfred/static/media/WorkSans-VariableFont_wght.a0297787a1a192213b53.ttf",
     "static/media/Group.png": "/Teste-Seri.e-The-Alfred/static/media/Group.77d3c46d95da06aa6625.png",
     "static/media/Shape@1,5x.svg": "/Teste-Seri.e-The-Alfred/static/media/Shape@1,5x.de3d7fd3b48ce3c93da0d41ea6b2619f.svg",
     "index.html": "/Teste-Seri.e-The-Alfred/index.html",
-    "main.c52b9f88.css.map": "/Teste-Seri.e-The-Alfred/static/css/main.c52b9f88.css.map",
-    "main.fa22b524.js.map": "/Teste-Seri.e-The-Alfred/static/js/main.fa22b524.js.map"
+    "main.d9a86b76.css.map": "/Teste-Seri.e-The-Alfred/static/css/main.d9a86b76.css.map",
+    "main.00f90556.js.map": "/Teste-Seri.e-The-Alfred/static/js/main.00f90556.js.map"
   },
   "entrypoints": [
-    "static/css/main.c52b9f88.css",
-    "static/js/main.fa22b524.js"
+    "static/css/main.d9a86b76.css",
+    "static/js/main.00f90556.js"
   ]
 }

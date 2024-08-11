@@ -3,7 +3,7 @@
     src: url(./fonts/WorkSans-VariableFont_wght.ttf);
 }
 
-html {
+html, button {
     font-family: Work Sans, Arial, Helvetica, sans-serif;
 }
 
@@ -104,32 +104,56 @@ header {
         width: 20%;
         flex: 0 0 20%;
         margin-bottom: 2rem;
+        cursor:pointer;
 
         .heroThumb {
             border-bottom: 5px solid $red;
             width: 100%;
         }
 
-        h3 {
-            color: $dark-gray;
-            font-size: clamp(16px, 1vw, 1.2vw);
-        }
-
         .heroLink {
-            button {
-                background: none;
-                border: none;
-                width: 32px;
-                height: 32px;
-                background-image: url(images/icones/heart/heart-empty-2x.png);
-                background-size:cover;
-                background-repeat: no-repeat;
-            }
 
-            &.favorited{
+            .heroName {
+                @include d-flex-wrap;
+                align-items: center;
+                justify-content: space-between;
+
+                h3 {
+                    color: $dark-gray;
+                    font-size: clamp(16px, .9vw, 1.1vw);
+                    width: calc(100% - 30px);
+                }
+
                 button {
-                    background-image: url(images/icones/heart/heart-filled-2x.png);
-                }  
+                    cursor: pointer;
+                }
+
+                button {
+                    background: none;
+                    border: none;
+                    width: 25px;
+                    height: 25px;
+                    background-image: url(images/icones/heart/heart-empty-2x.png);
+                    background-size:cover;
+                    background-repeat: no-repeat;
+
+                    &:hover {
+                        transition: .3s;
+                        background-image: url(images/icones/heart/heart-filled-2x.png);
+                    }
+                }
+    
+                &.favorited{
+                    button {
+                        transition: .3s;
+                        background-image: url(images/icones/heart/heart-filled-2x.png);
+    
+                        &:hover {
+                            transition: .3s;
+                            background-image: url(images/icones/heart/heart-empty-2x.png);
+                        }
+                    }  
+                }
             }
         }
         
@@ -156,8 +180,120 @@ header {
 }
 
 .heroesListPagination {
+    button {
+        width: 32px;
+        height: 32px;
+        border: 1px solid $red;
+        color: $red;
+        background-color: white;
+        border-radius: 4px;
+        margin: 5px;
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: $red;
+        color: white;
+    }
+}
+
+.listingAndOrdenation {
+    margin: 5rem 0 0 0;
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width: 992px) {
+        flex-direction: column;
+        align-items: start;
+        gap: .7rem;
+    }
+
+
+    .listingAndOrdenationResultCount, .listingAndOrdenationFilters {
+        flex:0 0 50%;
+    }
+
+    .listingAndOrdenationResultCount {
+        font-weight: 500;
+        font-size: clamp(16px, 1.2vw, 1.4vw);
+        color: $light-gray;
+    }
+
+    .listingAndOrdenationFilters {
+        display: flex;
+        justify-content: end;
+    }
+
+    .listingAndOrdenationFilterName {
+        display: flex;
+        align-items: center;
+        span {
+            font-weight: 500;
+            font-size: clamp(16px, 0.8vw, 1vw);
+            color: $red;
+            display: flex;
+            align-items: center;
+
+            img {
+                width: 18px;
+                margin-right: 0.7rem;
+            }
+        }
+    }
+}
+
+.toggleButtonOFF, .toggleButtonON{
+    background: none;
+    border: none;
+    transition: .5s;
+    margin: 0 1rem;
+    cursor:pointer;
+}
+
+.toggleButtonOFF {
+    svg {
+        width: 65px;
+        height: 35px;
+
+        &> defs > circle {
+            cx: 20.5;
+            transition: .5s;
+        }
+    }
+}
+
+.toggleButtonON {
+    svg {
+        width: 65px;
+        height: 35px;
+
+        &> defs > circle {
+            cx: 55.5;
+            transition: .5s;
+        }
+    }
+}
+
+.heroesListPagination {
     padding-bottom: 7rem;
     text-align: center;
+}
+
+.showOnlyFavorites {
+    font-weight: 500;
+    background:none;
+    border: none;
+    font-size: clamp(16px, .8vw, 1vw);
+    color: $red;
+    cursor: pointer;
+
+    align-items: center;
+    display: flex;
+    img {
+        margin-right: .7rem;
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @keyframes rotate {
@@ -182,25 +318,149 @@ header {
 .load {
 	width: 32px;
 	height: 32px;
-	margin: 110px auto 0;
+	margin:0 auto;
 	border:solid 10px $red;
 	border-radius: 50%;
 	border-right-color: transparent;
 	border-bottom-color: transparent;
-	 -webkit-transition: all 0.5s ease-in;
-    -webkit-animation-name:             rotate; 
-    -webkit-animation-duration:         1.0s; 
+	-webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name: rotate; 
+    -webkit-animation-duration: 1.0s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
     transition: all 0.5s ease-in;
-    animation-name:             rotate; 
-    animation-duration:         1.0s; 
+    animation-name: rotate; 
+    animation-duration: 1.0s; 
     animation-iteration-count:  infinite;
     animation-timing-function: linear; 
 }
 
+.heroesInfo {
+    background-color: $light-green;
+    width: 100%;
+    min-height: 100%;
+    z-index: 9;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+
+    .logo-wrapper {
+        max-width: 1600px;
+        width: 100%;
+        margin:auto;
+    }
+
+    .logo-wrapper {
+        display: flex;
+
+        .searchForm {
+            background: white;
+            width: 100%;
+        }
+    }
+
+    .heroInfoPageFavoriteICon {
+        background: none;
+        border: none;
+    }
+
+    .heroTitleWrapper {
+        @include d-flex-wrap;
+
+        justify-content: space-between;
+    }
+}
+
+.heroInfosWrapper {
+    @include d-flex-wrap;
+    margin-top: 2rem;
+    justify-content: space-between;
+
+    .heroInfos {
+        flex: 0 0 25%;
+
+        .heroInfos {
+            color: $gray;
+        }
+    }
+
+    .heroImage {
+        flex: 0 0 70%;
+    }
+}
+
+.heroComicsMoviesWrapper {
+    span {
+        font-size: clamp(16px, .8vw, .7vw);
+        line-height: clamp(16px, 1.5vw, 1.7vw);
+        font-weight: 500;
+
+        color: $gray;
+    }
+
+    .ratingWrapper {
+        margin-bottom: 2rem;
+
+        .rating {
+            @include d-flex-wrap;
+            align-items:center;
+
+            img {
+                height: 100%;
+                width: 7rem;
+                margin-left: 1rem;
+            }
+        }
+    }
+
+
+
+    .comicsCountSection {    
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+
+        @include d-flex-wrap;
+        justify-content: space-between;
+
+        .comics, .movies {
+            flex: 0 0 45%;
+
+            div {
+                @include d-flex-wrap;
+                align-items:center;
+                margin-top: 1rem;
+                font-size: clamp(16px, .8vw, .7vw);
+                line-height: clamp(16px, 1.5vw, 1.7vw);
+                font-weight: 500;
+
+                b {
+                    
+                }
+
+                span {
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.latestReleasesList {
+    @include d-flex-wrap;
+    gap: 5.88%;
+
+    .latestReleasesItem {
+        flex: 0 0 11.76%;
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
 .footer {
-    background-color: #FF1510;
+    background-color: $red;
     height: 3rem;
     width: 100%;
     bottom: 0;

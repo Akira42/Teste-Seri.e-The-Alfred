@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.scss';
 import HeroCard from './components/HeroCard';
+import {addToFavorites} from './functions';
 
 import logo from './images/logo/Group.png';
 import lupa from './images/busca/Lupa/Shape@1,5x.svg';
@@ -170,13 +171,34 @@ const App = () => {
     return formattedDate;
   };
 
+  const handleHeroPageFavorited = (heroId) => {
+    const favoritedHeroesList = JSON.parse(localStorage.getItem('Favorite Heroes')) || [];
+    for (let hero of favoritedHeroesList) {
+      console.log(hero);
+      if (hero.replace('heroid', '') === heroId) {
+        return true;
+      }
+    }
+  
+    return false;
+  };
+
+  const handleCloseHeroPage = () => {
+    let heroesInfo = document.getElementsByClassName('heroesInfo')[0];
+    heroesInfo.style.opacity = "0";
+    heroesInfo.style.visibility = "hidden";
+    heroesInfo.style.transtion = ".3s";
+
+    setTimeout( function(){heroesInfo.style.display = "none"}, 300);
+  };
+
   return (
     <main>
       <header className="header">
         <div className="container logo-wrapper">
-          <a className="logo">
+          <button className="logo">
             <img src={logo} alt="Marvel Search heroes" />
-          </a>
+          </button>
           <h1>Explore o Universo</h1>
           <h2>Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama - e aqueles que você descobrirá em breve!</h2>
         </div>
@@ -225,15 +247,12 @@ const App = () => {
             </div>
           </div>
           
-          
-
-          {/* incluir como componente */}
             {!loading && !showOnlyFavorites && (
-              <div className="heroesInfo">
+              <div className="heroesInfo" style={{display: "none"}}>
                 <div className="container logo-wrapper">
-                  <a className="logo">
+                  <button className="logo" onClick={handleCloseHeroPage}>
                     <img src={logo} alt="Marvel Search heroes" />
-                  </a>
+                  </button>
 
                   <div className="container search">
                     <form className="searchForm" onSubmit={handleSubmit}>
@@ -259,43 +278,37 @@ const App = () => {
                         <>
                         <div className="heroInfosWrapper">
                           <div className="heroInfos">
-
                             <div className="heroTitleWrapper">
                               <h2 className="heroTitle">{heroInfo.name}</h2>
-
-                              <button className="heroInfoPageFavoriteICon"><img src={heart} alt="símbolo coração" /></button>
+                              <div className={`heroInfoPageFavoriteICon ${handleHeroPageFavorited(heroInfo.id) ? 'favorited' : ''}`}>
+                                <button onClick={(e) => addToFavorites(`heroid${heroInfo.id}`, e)}></button>
+                              </div>
                             </div>
 
                             <div className="heroComicsMoviesWrapper">
-                              <span>{heroInfo.description}</span>
-
+                              <span className="heroDescription">{heroInfo.description}</span>
+                              
                               <div className="comicsCountSection">
                                 <div className="comics">
                                   <div><b>Quadrinhos</b></div>
-                                  
                                   <div>
                                     <img src={quadrinhos} alt="comics"/>
-
                                     <span>{heroComicsTotal}</span>
                                   </div>
                                 </div>
 
                                 <div className="movies">
-                                  <div><b>Quadrinhos</b></div>
-                                    
+                                  <div><b>Filmes</b></div>
                                   <div>
                                     <img src={filmes} alt="comics"/>
-
                                     <span>0</span>
                                   </div>
-
                                 </div>
                               </div>
 
                               <div className="ratingWrapper">
                                 <span className="rating">
-                                  <b>Rating:</b> 
-
+                                  <b>Rating:</b>
                                   <img src={review} alt="5 Estrelas"/>
                                 </span>
                               </div>
@@ -307,12 +320,12 @@ const App = () => {
                           </div>
 
                           <div className="heroImage">
-                          <img 
-                            src={heroInfo && heroInfo.thumbnail ? 
-                              `${heroInfo.thumbnail.path}/landscape_incredible.${heroInfo.thumbnail.extension}` : 
-                              'https://via.placeholder.com/400'} 
-                            alt={heroInfo ? heroInfo.name : 'Placeholder image'} 
-                          />
+                            <img 
+                              src={heroInfo && heroInfo.thumbnail ? 
+                                `${heroInfo.thumbnail.path}.${heroInfo.thumbnail.extension}` : 
+                                'https://via.placeholder.com/400'} 
+                              alt={heroInfo ? heroInfo.name : 'Placeholder image'} 
+                            />
                           </div>
                         </div>
 
@@ -336,7 +349,6 @@ const App = () => {
                 </div>
               </div>
             )}
-          {/* incluir como componente fim */}
 
           <div className="heroes">
             {displayedHeroes.map((hero) => (
@@ -344,7 +356,7 @@ const App = () => {
             ))}
           </div>
 
-          {loading && <div className="load"></div>}
+          {loading && <div className="loadContainer"><div className="load"></div></div>}
         </div>
 
         {!loading && !showOnlyFavorites && (

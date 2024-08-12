@@ -2,3 +2,32 @@
     display:flex;
     flex-wrap: wrap;
 }
+
+@mixin heart {
+    button {
+        background: none;
+        border: none;
+        width: 25px;
+        height: 25px;
+        background-image: url(images/icones/heart/heart-empty-2x.png);
+        background-size:cover;
+        background-repeat: no-repeat;
+
+        &:hover {
+            transition: .3s;
+            background-image: url(images/icones/heart/heart-filled-2x.png);
+        }
+    }
+
+    &.favorited{
+        button {
+            transition: .3s;
+            background-image: url(images/icones/heart/heart-filled-2x.png);
+
+            &:hover {
+                transition: .3s;
+                background-image: url(images/icones/heart/heart-empty-2x.png);
+            }
+        }  
+    }
+}

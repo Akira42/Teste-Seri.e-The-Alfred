@@ -29,10 +29,20 @@ const App = () => {
   const [heroComics, setHeroComics] = useState([]);
   const [heroComicsTotal, setHeroComicsTotal] = useState([]);
   const [error, setError] = useState(null);
+  const [showHeroInfo, setShowHeroInfo] = useState(false);
 
   const showCharacterInfo = async (heroId) => {
+    setShowHeroInfo(true);
     const URL = `${charactersUrl}/${heroId}?apikey=${publicKey}`;
     const URLComics = `${charactersUrl}/${heroId}/comics?orderBy=-onsaleDate&limit=10&apikey=${publicKey}`;
+    const heroesInfoElement = document.getElementsByClassName('heroesInfo')[0];
+
+    if (heroesInfoElement) {
+      heroesInfoElement.style.display = 'block';
+    } else {
+      console.error("Element com a classe 'heroesInfo' não foi encontrado.");
+    }
+
     try {
       setLoading(true);
       setError(null);
@@ -49,11 +59,12 @@ const App = () => {
       setHeroComics(dataComics.data.results);
       setHeroComicsTotal(dataComics.data.total);
       setHeroInfo(data.data.results[0]);
-      console.log(dataComics);
+      
     } catch (error) {
       setError(error.message);
       console.error("Failed to fetch character info:", error);
     } finally {
+      
       setLoading(false);
     }
   };
@@ -174,7 +185,6 @@ const App = () => {
   const handleHeroPageFavorited = (heroId) => {
     const favoritedHeroesList = JSON.parse(localStorage.getItem('Favorite Heroes')) || [];
     for (let hero of favoritedHeroesList) {
-      console.log(hero);
       if (hero.replace('heroid', '') === heroId) {
         return true;
       }
@@ -190,6 +200,7 @@ const App = () => {
     heroesInfo.style.transtion = ".3s";
 
     setTimeout( function(){heroesInfo.style.display = "none"}, 300);
+    setShowHeroInfo(false);
   };
 
   return (
@@ -248,7 +259,7 @@ const App = () => {
           </div>
           
             {!loading && !showOnlyFavorites && (
-              <div className="heroesInfo" style={{display: "none"}}>
+              <div className="heroesInfo" style={{ display: showHeroInfo ? "block" : "none" }}>
                 <div className="container logo-wrapper">
                   <button className="logo" onClick={handleCloseHeroPage}>
                     <img src={logo} alt="Marvel Search heroes" />

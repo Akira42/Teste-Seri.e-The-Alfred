@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.scss';
 import HeroCard from './components/HeroCard';
 import {addToFavorites} from './functions';
@@ -30,6 +30,7 @@ const App = () => {
   const [heroComicsTotal, setHeroComicsTotal] = useState([]);
   const [error, setError] = useState(null);
   const [showHeroInfo, setShowHeroInfo] = useState(false);
+  const isFirstRender = useRef(true);
 
   const showCharacterInfo = async (heroId) => {
     setShowHeroInfo(true);
@@ -71,7 +72,7 @@ const App = () => {
   
   const loadCharacters = async (search, page) => {
     const paginationOffset = page === 0 ? 0 : page * 20;
-    const URL = `${charactersUrl}?limit=20&offset=${paginationOffset || 'name'}&orderBy=${isToggled ? '-name' : 'name'}&${search ? 'nameStartsWith=' + search + '&' : ''}apikey=${publicKey}`;
+    const URL = `${charactersUrl}?limit=20&offset=${paginationOffset || '0'}&orderBy=${isToggled ? '-name' : 'name'}&${search ? 'nameStartsWith=' + search + '&' : ''}apikey=${publicKey}`;
     setLoading(true);
     setHeroes([]);
     try {
@@ -166,12 +167,21 @@ const App = () => {
   };
 
   const displayedHeroes = showOnlyFavorites ? favoriteHeroes : heroes;
+
   const handleToggle = () => {
     const nextToggleState = !isToggled;
     setIsToggled(nextToggleState);
     setCurrentPage(0);
-    loadCharacters('', 0);
   };
+
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      loadCharacters(searchTerm, 0);
+    }
+  }, [isToggled]);
 
   const handleDate = (dateStr) => {
     const date = new Date(dateStr);
